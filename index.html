@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halloween Route — Meld je huis of word vrijwilliger</title>
+  <meta name="description" content="Doe mee met de spannendste Halloween-route van de buurt. Meld je huis aan of geef je op als vrijwilliger." />
+  <meta property="og:title" content="Halloween Route — Meld je huis of word vrijwilliger" />
+  <meta property="og:description" content="Doe mee met de spannendste Halloween-route van de buurt. Meld je huis aan of geef je op als vrijwilliger." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root {
+      --bg: #0a0806;
+      --fg: #f5ede3;
+      --muted: #b8a894;
+      --orange: #f97316;
+      --orange-dark: #c2410c;
+      --border: #2a221a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; }
+
+    header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+    }
+    nav {
+      max-width: 80rem;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+    }
+    .logo { font-size: 1.125rem; font-weight: 700; letter-spacing: 0.05em; color: var(--fg); }
+
+    .menu-btn {
+      position: relative;
+      z-index: 50;
+      background: transparent;
+      border: none;
+      border-radius: 0.375rem;
+      padding: 0.5rem;
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .menu-btn:hover { background: rgba(255,255,255,0.08); }
+    .menu-btn .lines {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 1.5rem;
+      height: 1.25rem;
+    }
+    .menu-btn .lines span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: currentColor;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: left center;
+    }
+    .menu-btn[aria-expanded="true"] .lines span:nth-child(1) { transform: rotate(45deg) translate(2px, -2px); }
+    .menu-btn[aria-expanded="true"] .lines span:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] .lines span:nth-child(3) { transform: rotate(-45deg) translate(2px, 2px); }
+
+    #mobile-menu {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    #mobile-menu.open { max-height: 16rem; opacity: 1; }
+    #mobile-menu .panel {
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,8,6,0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 1.5rem 1.5rem;
+    }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu li { margin: 1rem 0; }
+    #mobile-menu a {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    #mobile-menu a:hover { color: var(--orange); }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 5rem;
+    }
+    .hero-bg {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      top: -5rem;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,8,6,0.3), transparent, var(--bg));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 56rem;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .hero-content p {
+      max-width: 42rem;
+      margin: 1.5rem auto 0;
+      font-size: 1.125rem;
+      color: var(--muted);
+    }
+    @media (min-width: 640px) { .hero-content p { font-size: 1.25rem; } }
+
+    .cta-row {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+    @media (min-width: 640px) {
+      .cta-row { flex-direction: row; align-items: center; justify-content: center; }
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background: var(--orange);
+      color: #1a0d02;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 10px 15px -3px rgba(249,115,22,0.25);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .cta:hover { transform: scale(1.05); background: var(--orange-dark); color: #fff; }
+    @media (min-width: 640px) { .cta { padding: 1.25rem 2rem; font-size: 1.125rem; } }
+
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 48rem;
+      margin-inline: auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    main section { margin-bottom: 6rem; }
+    h2 { font-size: 1.875rem; font-weight: 700; margin-bottom: 1rem; }
+    main p { color: var(--muted); line-height: 1.7; }
+    main a { color: var(--orange); font-weight: 600; }
+    main a:hover { text-decoration: underline; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="#">Halloween Route</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" id="menu-button">
+        <span class="sr-only">Menu openen</span>
+        <span class="lines"><span></span><span></span><span></span></span>
+      </button>
+    </nav>
+    <div id="mobile-menu">
+      <div class="panel">
+        <ul>
+          <li><a href="#over-ons">Over ons</a></li>
+          <li><a href="#de-route">De route</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="halloween-hero.jpg" alt="Schattig Halloween dorpje met verlichte huizen en pompoenen voor de deur" width="1920" height="1080" />
+    </div>
+    <div class="hero-content">
+      <h1>De magie van Halloween</h1>
+      <p>Ontmoet buren, trotseer de duisternis en maak van onze straat het meest griezelige plekje van de wijk.</p>
+      <div class="cta-row">
+        <a class="cta" href="#huis-aanmelden">Ik wil graag mijn huis op de route hebben</a>
+        <a class="cta" href="#vrijwilliger">Ik wil graag opgeven als vrijwilliger</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="over-ons">
+      <h2>Over ons</h2>
+      <p>De Halloween-route wordt jaarlijks georganiseerd door enthousiaste buurtbewoners. Samen creëren we een veilige, griezelige avond voor kinderen en ouders. Van versierde tuinen tot snoepstations: jij bepaalt hoe eng het wordt.</p>
+    </section>
+    <section id="de-route">
+      <h2>De route</h2>
+      <p>De route loopt door de hele wijk en is goed aangegeven met pompoenlantaarns. Startpunt en tijden worden een week van tevoren gedeeld. Houd onze socials in de gaten voor het laatste nieuws.</p>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Vragen of ideeën? Mail ons op <a href="mailto:info@halloweenroute.nl">info@halloweenroute.nl</a> of spreek ons aan bij de volgende buurtbijeenkomst.</p>
+    </section>
+  </main>
+
+  <footer>&copy; 2026 Halloween Route</footer>
+
+  <script>
+    const btn = document.getElementById('menu-button');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.querySelector('.sr-only').textContent = open ? 'Menu sluiten' : 'Menu openen';
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }));
+  </script>
+</body>
+</html>
