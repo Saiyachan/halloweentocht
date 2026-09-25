@@ -1,335 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halloween Route — Meld je huis of word vrijwilliger</title>
-  <meta name="description" content="Doe mee met de spannendste Halloween-route van de buurt. Meld je huis aan of geef je op als vrijwilliger." />
-  <meta property="og:title" content="Halloween Route — Meld je huis of word vrijwilliger" />
-  <meta property="og:description" content="Doe mee met de spannendste Halloween-route van de buurt. Meld je huis aan of geef je op als vrijwilliger." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Doe mee met de Landsmeerse Griezelhuisjes Tocht in Havenzathe.">
+  <title>Halloween Landsmeer — De Landsmeerse Griezelhuisjes Tocht</title>
   <style>
-    :root {
-      --bg: #0a0806;
-      --fg: #f5ede3;
-      --muted: #b8a894;
-      --orange: #f97316;
-      --orange-dark: #c2410c;
-      --border: #2a221a;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-    }
-    a { text-decoration: none; }
-
-    header {
-      position: fixed;
-      inset-inline: 0;
-      top: 0;
-      z-index: 50;
-    }
-    nav {
-      max-width: 80rem;
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-    }
-    .logo { font-size: 1.125rem; font-weight: 700; letter-spacing: 0.05em; color: var(--fg); }
-
-    .menu-btn {
-      position: relative;
-      z-index: 50;
-      background: transparent;
-      border: none;
-      border-radius: 0.375rem;
-      padding: 0.5rem;
-      color: var(--fg);
-      cursor: pointer;
-    }
-    .menu-btn:hover { background: rgba(255,255,255,0.08); }
-    .menu-btn .lines {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 1.5rem;
-      height: 1.25rem;
-    }
-    .menu-btn .lines span {
-      display: block;
-      height: 2px;
-      width: 100%;
-      background: currentColor;
-      transition: transform 0.3s, opacity 0.3s;
-      transform-origin: left center;
-    }
-    .menu-btn[aria-expanded="true"] .lines span:nth-child(1) { transform: rotate(45deg) translate(2px, -2px); }
-    .menu-btn[aria-expanded="true"] .lines span:nth-child(2) { opacity: 0; }
-    .menu-btn[aria-expanded="true"] .lines span:nth-child(3) { transform: rotate(-45deg) translate(2px, 2px); }
-
-    #mobile-menu {
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-    #mobile-menu.open { max-height: 16rem; opacity: 1; }
-    #mobile-menu .panel {
-      border-bottom: 1px solid var(--border);
-      background: rgba(10,8,6,0.95);
-      backdrop-filter: blur(8px);
-      padding: 0.5rem 1.5rem 1.5rem;
-    }
-    #mobile-menu ul { list-style: none; }
-    #mobile-menu li { margin: 1rem 0; }
-    #mobile-menu a {
-      display: block;
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: var(--fg);
-    }
-    #mobile-menu a:hover { color: var(--orange); }
-
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 5rem;
-    }
-    .hero-bg {
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      top: -5rem;
-    }
-    .hero-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-    }
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(10,8,6,0.3), transparent, var(--bg));
-    }
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      max-width: 56rem;
-      margin-inline: auto;
-      padding-inline: 1.5rem;
-      text-align: center;
-    }
-    h1 {
-      font-size: clamp(2.25rem, 6vw, 4.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .hero-content p {
-      max-width: 42rem;
-      margin: 1.5rem auto 0;
-      font-size: 1.125rem;
-      color: var(--muted);
-    }
-    @media (min-width: 640px) { .hero-content p { font-size: 1.25rem; } }
-
-    .cta-row {
-      margin-top: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: stretch;
-    }
-    @media (min-width: 640px) {
-      .cta-row { flex-direction: row; align-items: center; justify-content: center; }
-    }
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 9999px;
-      background: var(--orange);
-      color: #1a0d02;
-      font-weight: 700;
-      font-size: 1rem;
-      text-align: center;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 10px 15px -3px rgba(249,115,22,0.25);
-      transition: transform 0.2s, background 0.2s;
-    }
-    .cta:hover { transform: scale(1.05); background: var(--orange-dark); color: #fff; }
-    @media (min-width: 640px) { .cta { padding: 1.25rem 2rem; font-size: 1.125rem; } }
-
-    main {
-      position: relative;
-      z-index: 10;
-      max-width: 48rem;
-      margin-inline: auto;
-      padding: 3rem 1.5rem 6rem;
-    }
-    main section { margin-bottom: 6rem; }
-    h2 { font-size: 1.875rem; font-weight: 700; margin-bottom: 1rem; }
-    main p { color: var(--muted); line-height: 1.7; }
-    main a { color: var(--orange); font-weight: 600; }
-    main a:hover { text-decoration: underline; }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 0.875rem;
-      color: var(--muted);
-    }
-    .sr-only {
-      position: absolute; width: 1px; height: 1px; overflow: hidden;
-      clip: rect(0 0 0 0); white-space: nowrap;
-    }
-
-    li {
-      color: #f97316;;
-
-    }
-
-    ul {
-      color: #b8a894;
-    }
+    :root{--bg:#000;--fg:#eeeae2;--muted:#9997a0;--orange:#e16c22;--orange-hover:#f39a42;--border:#29272b}*{box-sizing:border-box}
+    html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:Arial,sans-serif;line-height:1.55}
+    header{position:fixed;inset:0 0 auto;z-index:20;background:#000;border-bottom:1px solid var(--border)}nav{max-width:1280px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{color:var(--fg);text-decoration:none;font-weight:800;font-size:18px}
+    .menu-btn{position:relative;width:40px;height:40px;border:0;border-radius:6px;background:transparent;color:var(--fg);cursor:pointer}
+    .menu-btn:hover{background:#211c18}
+    .hamburger,.pumpkin{position:absolute;inset:0;margin:auto;transition:.3s}
+    .hamburger{width:24px;height:18px;display:flex;flex-direction:column;justify-content:space-between}
+    .hamburger i{height:2px;background:currentColor;border-radius:2px}
+    .pumpkin{width:30px;height:27px;opacity:0;transform:rotate(-90deg) scale(.5)}
+    .pumpkin:before{content:"";position:absolute;left:13px;top:0;width:5px;height:8px;background:var(--orange-hover);border-radius:2px}
+    .pumpkin:after{content:"🎃";position:absolute;left:0;top:2px;font-size:25px}
+    .menu-btn[aria-expanded=true] .hamburger{opacity:0;transform:rotate(90deg) scale(.5)}
+    .menu-btn[aria-expanded=true] .pumpkin{opacity:1;transform:none}.menu{max-height:0;overflow:hidden;opacity:0;transition:.3s}
+    .menu.open{max-height:240px;opacity:1}.menu ul{list-style:none;margin:0;padding:8px 24px 24px}.menu li+li{margin-top:12px}
+    .menu a{color:var(--fg);font-size:18px;font-weight:600;text-decoration:none}.menu a:hover{color:var(--orange)}
+    .hero{position:relative;min-height:100vh;padding:100px 24px 64px;display:flex;align-items:center;justify-content:center;text-align:center}
+    .hero-bg{position:absolute;inset:0}.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:top}
+    .hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18) 0%,transparent 45%,#000 100%)}
+    .hero-content{position:relative;z-index:1;max-width:900px}
+    .hero h1{margin:0;color:var(--orange);font-size:clamp(38px,7vw,72px);line-height:1.08;font-weight:900}
+    .intro{max-width:720px;margin:24px auto 0;color:#fff;font-size:clamp(18px,2.2vw,21px)}
+    .intro p{margin:0 0 16px;color:#fff}
+    .buttons{margin-top:38px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:16px 28px;border-radius:999px;background:var(--orange);color:#241207;text-decoration:none;font-weight:800;box-shadow:0 10px 30px rgba(225,108,34,.22);transition:.2s}.button:hover{background:var(--orange-hover);transform:scale(1.04)}main{max-width:768px;margin:auto;padding:48px 24px 96px}section{margin-bottom:96px}h2{font-size:32px;line-height:1.2;margin:0 0 18px}p{color:var(--muted)}.map{display:block;width:100%;height:auto;margin-top:24px;border:1px solid var(--border);border-radius:8px}.steps{list-style:none;padding:0;margin:24px 0}.steps li{display:flex;gap:16px;align-items:flex-start;margin:24px 0;color:var(--muted);font-size:18px}.number{flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#241207;font-weight:900}.enjoy{text-align:center;color:var(--orange);font-size:20px;font-weight:800}.faq{border:1px solid var(--border);border-radius:8px;padding:0 16px}.faq-item+.faq-item{border-top:1px solid var(--border)}.faq button{width:100%;padding:17px 0;border:0;background:transparent;color:var(--fg);display:flex;justify-content:space-between;gap:16px;text-align:left;font:600 16px Arial;cursor:pointer}.faq button:hover{color:var(--orange)}.answer{display:grid;grid-template-rows:0fr;opacity:0;transition:.2s}.answer>div{overflow:hidden}.answer p{margin:0;padding:0 0 16px}.faq button[aria-expanded=true]+.answer{grid-template-rows:1fr;opacity:1}.arrow{color:var(--orange);transition:.2s}.faq button[aria-expanded=true] .arrow{transform:rotate(180deg)}a{color:var(--orange)}footer{padding:32px 24px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}@media(max-width:639px){.hero{min-height:1050px;align-items:start;padding-top:180px}.buttons{display:grid}.button{width:100%}main{padding-top:32px}section{margin-bottom:72px}h2{font-size:29px}}
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a class="logo" href="#">Halloween Route</a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" id="menu-button">
-        <span class="sr-only">Menu openen</span>
-        <span class="lines"><span></span><span></span><span></span></span>
-      </button>
-    </nav>
-    <div id="mobile-menu">
-      <div class="panel">
-        <ul>
-        
-          <li><a href="#FAQ">Veelgestelde vragen</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
+<header><nav><a class="brand" href="#top">Halloween Landsmeer</a><button id="menuButton" class="menu-btn" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
+  <span class="hamburger"><i></i><i></i><i></i></span>
+  <span class="pumpkin" aria-hidden="true"></span>
+</button></nav><div id="mobileMenu" class="menu">
+  <ul><li><a href="#tochtgebied">Griezelhuisjes tocht gebied</a>
+  </li><li><a href="#faq">Veel gestelde vragen</a>
+  </li><li><a href="#contact">Contact</a>
+  </li></ul></div>
+</header>
 
-  <section class="hero">
-    <div class="hero-bg">
-      <img src="halloween-hero.png" alt="Schattig Halloween dorpje met verlichte huizen en pompoenen voor de deur" width="1920" height="1080" />
-    </div>
-    <div class="hero-content">
-      <h1>Halloween komt naar Landsmeer!</h1>
-      <p>Op Zaterdag 31 Oktober van 19:00 tot 21:00 voor kinderen van 4 tot 12 Jaar 
+<section class="hero" id="top"><div class="hero-bg"><img src="halloween-hero.png" alt="Getekende Zaanse dorpsstraat met Halloweenversiering en een zwaan in een pompoenkostuum"></div>
+  <div class="hero-content"><h1>De Landsmeerse Griezelhuisjes Tocht</h1><div class="intro">
+    <p>Halloween komt naar Landsmeer! Op Zaterdag 31 Oktober van 19:00 tot 21:00 voor kinderen van 4 tot 12 jaar organiseren wij in de wijk Havenzathe de Landsmeerse Griezel huisjes tocht.</p>
+    <p>Wil jij meedoen als Griezelhuis (geen snoep, alleen versiering en kinderen een stempel op hun kaart geven) of woon je niet in havenzathe maar wil je toch heel graag meedoen en andere 
+      mensen helpen met versieren. Meld je dan nu aan!</p></div><div class="buttons">
+        <a class="button" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdBvlzgu8BGcV4MG4bOnkBvXom-EasSYIJxycdPOMvL5j757g/viewform?usp=header">Ik wil graag mijn huis versieren</a><a class="button" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSe6R7KGtsfVFlfWP6-CaqLQBtdtuj1gsQjWH4qZUN3H8NWdDg/viewform?usp=publish-editor">Ik wil graag helpen als vrijwilliger</a></div></div></section>
 
-organiseren wij in de wijk Havenzathe de Landsmeerse Griezel huisjes tocht. 
+<main>
 
-Wil jij meedoen als Griezelhuis (geen snoep, alleen versiering en kinderen een stempel op hun kaart geven) of woon je niet in havenzathe maar wil je toch heel graag meedoen en andere mensen helpen met versieren.
-<br><br>
-Meld je dan nu aan!</p>
-      <div class="cta-row">
-        <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdBvlzgu8BGcV4MG4bOnkBvXom-EasSYIJxycdPOMvL5j757g/viewform?usp=dialog">Ik wil graag mijn huis versieren</a>
-        <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSe6R7KGtsfVFlfWP6-CaqLQBtdtuj1gsQjWH4qZUN3H8NWdDg/viewform?usp=dialog">Ik wil graag helpen als vrijwilliger</a>
-      </div>
-    </div>
+
+  <section id="tochtgebied"><h2>Het Griezelhuisjes tocht gebied</h2><p>Het gebied waar de tocht zal plaatsvinden is de wijk 'Havenzathe' in Landsmeer. 
+    Dit is tevens ook de plek waar we op zoek zijn naar huizen die mee willen doen. Woon jij in de wijk 'Havenzathe' en wil je mee doen met een geweldig 
+    versierd griezel huis? Dan zijn wij op zoek naar jou!</p>
+    
+    <img class="map" src="griezelhuisjes-tocht-gebied.jpeg" alt="Kaart van het Griezelhuisjestochtgebied in de Havenzathe in Landsmeer">
   </section>
 
-  <main>
-  
-    <section id="FAQ">
-      <h2>Veelgestelde vragen</h2>
-      <p>
-           <ul><li><b>Ik heb me aangemeld als huis, en nu?</b></li>
 
-Wij nemen dan voor 1 oktober contact met je op en komen langs om met je bespreken wat je gaat doen, en of we hierbij kunnen helpen.
-<br><br>
-    <li><b>Ik heb met aangemeld als vrijwilliger, en nu?</b></li>
 
-Wat fijn! We nemen zsm contact met je op, zodra we weten hoeveel mensen hulp kunnen gebruiken.  
-<br><br>
-    <li><b>Wat is de uiterste datum wanneer mijn huis versierd moet zijn</b></li>
 
-Vanaf zaterdag 24 oktober begint het winkel centrum in Landsmeer met versieren, maar de huizen op de route moeten VOOR Zaterdag 31 Oktober 10:00 versierd/ klaar zijn. 
-<br><br>
-    <li><b>Wie is mijn contact persoon op de avond zelf? </b></li>
 
-Jullie krijgen een aangewezen contact persoon na aanmelding. 
-<br><br>
-    <li><b>Wie doet de stempels?</b></li>
-
-Wij leveren de stempel aan jullie, en jullie zijn verantwoordelijk voor het stempelen van de kaarten zelf. 
-<br><br>
-    <li><b>Mag ik ook snoep geven?</b></li>
-
-Je bent vrij om snoep te geven, maar houd er rekening mee dat er tussen de 75 en 125 kinderen kunnen komen. 
-<br><br>
-    <li><b>Ik heb niet veel versiering of budget om versiering te kopen?</b></li>
-
-Geen probleem, wij kunnen altijd helpen. Dit zullen we met je bespreken tijdens de introductie. 
-<br><br>
-    <li><b>Ik kan fysiek niet goed versieren, kan ik ook hulp krijgen?
-</b></li>
-Absoluut! Daar hebben wij onze vrijwilligers en Halloween fans voor! 
-<br><br>
-    <li><b>Wanneer moeten we afbouwen?
-</b></li>
-Dat mag de dag erna, ook hier kunnen we bij helpen. 
-<br><br>
-    <li><b>Hoeveel kinderen verwachten jullie?</b></li>
-
-Ligt aan het weer! Maar we gokken tussen de 75 en 125 kinderen. 
-<br><br>
-    <li><b>Ik heb me opgegeven, maar ben die avond niet thuis? </b></li>
-
-Dit valt te bespreken, we moeten dan iemand anders regelen om voor jouw huis te staan om te stempelen. 
-
-</ul>
-      </p>
-    </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Voor verdere vragen kan je ons altijd mailen op:
-
-<a href="mailto:LandsmeerHalloween@gmail.com">LandsmeerHalloween@gmail.com</a> </p>
-<br>
- <p>Hopelijk tot snel!</p>
-<br>
-<p>Het Spooky Team</p>
-<br>
-<p>Lana, Kim, Linda, Deborah en Kristina </p>
-    </section>
-  </main>
-
-  <footer>&copy; 2026 Halloween Route</footer>
-
-  <script>
-    const btn = document.getElementById('menu-button');
-    const menu = document.getElementById('mobile-menu');
-    btn.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-      btn.querySelector('.sr-only').textContent = open ? 'Menu sluiten' : 'Menu openen';
-    });
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }));
-  </script>
-</body>
-</html>
+<section id="faq"><h2>Veel gestelde vragen</h2><div class="faq" id="faqList"></div></section>
+<section id="contact"><h2>Contact</h2><p>Voor verdere vragen kan je ons altijd mailen op: <a href="mailto:LandsmeerHalloween@gmail.com"><strong>LandsmeerHalloween@gmail.com</strong>
+</a></p><p>Hopelijk tot snel!</p><p>Het Spooky Team</p><p>Lana, Kim, Linda, Deborah en Kristina</p></section>
+</main><footer>© <span id="year"></span> Halloween Route</footer>
+<script>
+const faq=[['Ik heb me aangemeld als huis, en nu?','Wij nemen dan contact met je op en komen langs om met je bespreken wat je gaat doen, en of we hierbij kunnen helpen.'],['Ik heb me aangemeld als vrijwilliger, en nu?','Wat fijn! We nemen zsm contact met je op, zodra we weten hoeveel mensen hulp kunnen gebruiken.'],['Wat is de uiterste datum wanneer mijn huis versierd moet zijn?','Vanaf zaterdag 24 oktober begint het winkelcentrum in Landsmeer met versieren, maar de huizen op de route moeten uiterlijk zaterdag 31 oktober 10:00 versierd zijn.'],['Wie is mijn contactpersoon op de avond zelf?','Jullie krijgen een aangewezen contactpersoon na aanmelding.'],['Wie doet de stempels?','Wij leveren de stempel aan jullie, en jullie zijn verantwoordelijk voor het stempelen van de kaarten zelf.'],['Mag ik ook snoep geven?','Je bent vrij om snoep te geven, maar houd er rekening mee dat er tussen de 75 en 125 kinderen kunnen komen.'],['Ik heb niet veel versiering of budget om versiering te kopen?','Geen probleem, wij kunnen altijd helpen. Dit zullen we met je bespreken tijdens de introductie.'],['Ik kan fysiek niet goed versieren, kan ik ook hulp krijgen?','Absoluut! Daar hebben wij onze vrijwilligers en Halloween fans voor!'],['Wanneer moeten we afbouwen?','Dat mag de dag erna, ook hier kunnen we bij helpen.'],['Hoeveel kinderen verwachten jullie?','Ligt aan het weer! Maar we gokken tussen de 75 en 125 kinderen.'],['Ik heb me opgegeven, maar ben die avond niet thuis?','Dit valt te bespreken, we moeten dan iemand anders regelen om voor jouw huis te staan om te stempelen.']];
+const list=document.getElementById('faqList');faq.forEach(([q,a])=>{const item=document.createElement('div');item.className='faq-item';item.innerHTML=`<button type="button" aria-expanded="false"><span>${q}</span><span class="arrow">⌄</span></button><div class="answer"><div><p>${a}</p></div></div>`;item.querySelector('button').addEventListener('click',e=>{const b=e.currentTarget;b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')});list.appendChild(item)});
+const menuButton=document.getElementById('menuButton'),menu=document.getElementById('mobileMenu');menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Menu sluiten':'Menu openen')});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body></html>
