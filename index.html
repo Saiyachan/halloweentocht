@@ -34,7 +34,7 @@
     .menu-btn[aria-expanded=true] .hamburger{opacity:0;transform:rotate(90deg) scale(.5)}
     .menu-btn[aria-expanded=true] .pumpkin{opacity:1;transform:none}
     .menu{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s,opacity .3s}
-    .menu.open{max-height:260px;opacity:1}
+    .menu.open{max-height:280px;opacity:1}
     .menu ul{list-style:none;margin:0;padding:8px 24px 24px}
     .menu li+li{margin-top:12px}
     .menu a{color:var(--fg);font-size:18px;font-weight:600;text-decoration:none}
@@ -59,7 +59,7 @@
     .cards{display:grid;gap:16px}
     .cards-3{grid-template-columns:repeat(3,1fr)}
     .cards-2{grid-template-columns:repeat(2,1fr)}
-    .cards img{display:block;width:100%;height:auto;border:0px solid var(--border);border-radius:8px}
+    .cards img{display:block;width:82%;margin:0 auto;height:auto;border:0;border-radius:0}@media(min-width:640px){.cards img{width:100%}}
     .map{display:block;width:100%;height:auto;margin-top:24px;border:1px solid var(--border);border-radius:8px}
     .steps{list-style:none;padding:0;margin:24px 0}
     .steps li{display:flex;gap:16px;align-items:flex-start;margin:24px 0;color:var(--muted);font-size:18px}
@@ -81,7 +81,7 @@
       .hero{min-height:1050px;align-items:start;padding-top:180px}
       .buttons{display:grid}
       .button{width:100%}
-      main{padding-top:32px}
+      main{padding-top:0px}
       section{margin-bottom:72px}
       h2{font-size:29px}
       .cards-3,.cards-2{grid-template-columns:1fr}
@@ -99,11 +99,13 @@
   </nav>
   <div id="mobileMenu" class="menu">
     <ul>
-  <li><a href="#dagprogramma">Het programma</a></li>
-   <li><a href="#tochtgebied">Griezelhuisjes tocht gebied</a></li>
-   <li><a href="#geschiedenis">Geschiedenis van Halloween</a></li>
-  <li><a href="#faq">Veel gestelde vragen</a></li>
-  <li><a href="#contact">Contact</a>
+      <li><a href="#Uitleg">Avond Programma</a></li>
+      <li><a href="#tochtgebied">Griezelhuisjes kaart</a></li>
+      <li><a href="#Spelregels">Spelregels</a></li>
+      <li><a href="#Bereikbaarheid">Bereikbaarheid</a></li>
+      <li><a href="#geschiedenis">Geschiedenis van Halloween</a></li>
+      <li><a href="#faq">Veelgestelde vragen</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </header>
@@ -111,16 +113,13 @@
 <section class="hero" id="top">
   <div class="hero-bg"><img src="halloween-hero.png" alt="Getekende Landsmeerse dorpsstraat met Halloweenversiering en een zwaan in een pompoenkostuum"></div>
   <div class="hero-content">
-    <h1>De Landsmeerse Griezelhuisjes Tocht</h1>
+     <h1>De Landsmeerse Griezelhuisjes Tocht</h1>
     <div class="intro">
-      <p>Op zaterdag 31 Oktober</p>
-<p>Halloween komt naar Landsmeer!</p>
-<p>Voor kinderen 4 t/m 12 jaar. </p>
+      <p>Het is bijna zover. Op zaterdag 31 Oktober</p>
+<p>komt Halloween naar Landsmeer!</p>
+<p>Voor kinderen 4 t/m 12 jaar. Tot dan!</p>
     </div>
-    <div class="buttons">
-     
-      <a class="button" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSe6R7KGtsfVFlfWP6-CaqLQBtdtuj1gsQjWH4qZUN3H8NWdDg/viewform?usp=publish-editor">Ik wil graag helpen als vrijwilliger</a>
-    </div>
+    
   </div>
 </section>
 
@@ -143,11 +142,56 @@
     </div>
   </section>
 
-  <section id="tochtgebied">
-    <h2>Het Griezelhuisjes tocht gebied</h2>
-    <p>Het gebied waar de tocht zal plaatsvinden is de Havenzathe wijk in Landsmeer. Op dit moment hebben we genoeg huizen en in het inschrijven gesloten.</p>
-    <img class="map" src="griezelhuisjes-tocht-gebied.jpeg" alt="Kaart van het Griezelhuisjestochtgebied in de Havenzathe in Landsmeer" width="1142" height="823" loading="lazy">
+    <section id="Uitleg">
+    <h2>Uitleg Avond Programma</h2>
+    <p>Tussen 19:00 en 20:00 kunnen de route- en stempelkaarten opgehaald worden bij
+Sporthal ICL De remise- Adres Marktplein 11
+Aan de hand van deze route kaart kan iedereen zijn eigen route kiezen door de buurt
+Havenzathe.
+Als alle huizen zijn bezocht en de stempels zijn verzameld, eindigt de route bij Jumbo waar een
+“treat” opgehaald kan worden.
+</p>
   </section>
+
+  <section id="tochtgebied">
+    <h2>Het Griezelhuisjes kaart</h2>
+    <p>De route langs de griezelhuizen bevindt zich in de Havenzathe buurt in Landsmeer. Hieronder op de kaart zijn de griezelhuisjes aangeduid met een pompoen. Midden in het gebied is een informatiepunt mocht je huizen niet kunnen vinden or vragen hebben.</p>
+    <img class="map" src="griezelhuisjes-tocht-gebied.jpg" alt="Kaart van het Griezelhuisjestochtgebied in de Havenzathe in Landsmeer" width="1142" height="823" loading="lazy">
+  </section>
+
+
+
+  <section id="Spelregels">
+    <h2>Spelregels</h2>
+    <ol class="steps">
+      <li><span class="number">1</span><span>Er wordt geen snoep uitgedeeld bij de griezelhuize!</span></li>
+      <li><span class="number">2</span><span>Niet aanbellen bij de oranje cirkel huizen, alleen bij de aangegeven BLAUWE stempel
+huizen.</span></li>
+      <li><span class="number">3</span><span>Met een volle stempelkaart kan de ‘treat” worde opgehaald worden bij de Jumbo</span></li>
+      <li><span class="number">4</span><span>Gezinnen en vriendengroepjes kunnen met 1 route/stempel kaart doen</span></li>
+      <li><span class="number">5</span><span>Op de avond zelf zal de route ook digitaal staan - via de QR code bij de aanmeld tafel</span></li>
+      <li><span class="number">6</span><span>Er staan vrijwilligers langs de route mochten er onduidelijkheden zijn</span></li>
+      <li><span class="number">7</span><span>De Griezelhuisjes route eindigt om 21:00, zorg dat je voor die tijd terug bent bij Jumbo</span></li>
+      <li><span class="number">8</span><span>Kom graag verkleed 🎃!</span></li>
+
+
+
+
+    </ol>
+    <p class="enjoy">Heel veel plezier!</p>
+  </section>
+
+  <section id="Bereikbaarheid">
+    <h2>Bereikbaarheid</h2>
+    <p>Sporthal ICL de Remise is makkelijk te bereiken via elke vorm van vervoer.
+De Griezelhuizen route begint op een loopafstand van 5 minuten van het Marktplein.
+Parkeren is gratis in Landsmeer en kan voor de deur van ICL de Remise- maar wees alert op
+de kinderen</p>
+   
+  </section>
+
+
+
 
   <section id="geschiedenis">
     <h2>De geschiedenis van Halloween</h2>
@@ -160,10 +204,8 @@ En zo is de Griezelhuizentocht ontstaan, die dit jaar gehouden wordt in de wijk 
    
   </section>
 
-
-
   <section id="faq">
-    <h2>FAQ</h2>
+    <h2>Veelgestelde vragen</h2>
     <div class="faq" id="faqList"></div>
   </section>
 
